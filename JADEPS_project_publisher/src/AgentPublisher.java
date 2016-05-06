@@ -11,8 +11,7 @@ import jade.lang.acl.MessageTemplate;
 import model.SubManager;
 import model.Subscriber;
 
-import java.util.ArrayList;
-import java.util.Random;
+
 
 
 public class AgentPublisher extends Agent {
