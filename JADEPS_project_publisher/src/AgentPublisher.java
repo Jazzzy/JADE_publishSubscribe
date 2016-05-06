@@ -11,7 +11,7 @@ import jade.lang.acl.MessageTemplate;
 import model.SubManager;
 import model.Subscriber;
 
-
+import java.util.Iterator;
 
 
 public class AgentPublisher extends Agent {
@@ -62,13 +62,25 @@ public class AgentPublisher extends Agent {
 
             }
 
-            sm.removeEndedSubs();
+
+            Iterator<Subscriber> ite = sm.listOfSubscribers.iterator();
+            while (ite.hasNext()) {
+                Subscriber sub = ite.next();
+                if (sub.getNumberOfCallsLeft() <= 0) {
+                    System.out.println("We removed " + sub.getAid() + " because we did all the neccesary calls");
+
+                    ACLMessage msg = new ACLMessage(ACLMessage.CANCEL);
+                    msg.addReceiver(sub.getAid());
+                    myAgent.send(msg);
+
+                    ite.remove();
+                }
+            }
 
         }
     }
 
     private class ReceiveSubscriptions extends CyclicBehaviour {
-
 
         @Override
         public void action() {

@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class SubManager {
 
-    ArrayList<Subscriber> listOfSubscribers;
+    public ArrayList<Subscriber> listOfSubscribers;
 
     public SubManager() {
         this.listOfSubscribers = new ArrayList<>();
@@ -45,16 +45,7 @@ public class SubManager {
         }
     }
 
-    public void removeEndedSubs() {
-        Iterator<Subscriber> ite = this.listOfSubscribers.iterator();
-        while (ite.hasNext()) {
-            Subscriber sub = ite.next();
-            if (sub.getNumberOfCallsLeft() <= 0){
-                System.out.println("We removed "+sub.getAid()+" because we did all the neccesary calls");
-                ite.remove();
-            }
-        }
-    }
+
 
 
 }
